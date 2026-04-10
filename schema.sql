@@ -1,0 +1,71 @@
+CREATE TABLE OWNERS (
+	owner_id INT PRIMARY KEY AUTO_INCREMENT,
+	first_name VARCHAR(50) NOT NULL,
+	last_name VARCHAR(50) NOT NULL,
+	phone VARCHAR(15),
+	email VARCHAR(100),
+	address VARCHAR(255),
+);
+-- One OWNER to Many PETS
+
+CREATE TABLE PETS (
+	pet_id INT PRIMARY KEY AUTO_INCREMENT,
+	owner_id INT,
+	name VARCHAR(50) NOT NULL,
+	species VARCHAR(50),
+	breed VARCHAR(50),
+	date_of_birth DATE,
+	gender VARCHAR(10),
+	FOREIGN KEY (owner_id) REFERENCES OWNERS(owner_id)
+);
+-- One PETS to Many Appointments
+
+CREATE TABLE STAFF (
+  staff_id INT PRIMARY KEY AUTO_INCREMENT,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  staff_role VARCAHR(50) NOT NULL,
+  phone VARCHAR(15),
+  email VARCHAR(100)
+);
+-- One STAFF to Many APPOINTMENTS
+
+CREATE TABLE APPOINTMENTS (
+  appt_id INT PRIMARY KEY AUTO_INCREMENT,
+  pet_id INT NOT NULL,
+  staff_id INT NOT NULL,
+  appt_date DATETIME NOT NULL,
+  reason VARCHAR(255),
+  status VARCHAR(50),
+
+  FOREIGN KEY (pet_id) REFERENCES PETS(pet_id),
+  FOREIGN KEY (staff_id) REFERENCES STAFF(staff_id)
+);
+-- Many APPOINTMENTS to Many PETS
+-- Many APPOINTMENTS to Many STAFF
+
+CREATE TABLE MEDICAL_RECORDS (
+  record_id INT PRIMARY KEY AUTO_INCREMENT,
+  pet_id INT NOT NULL,
+  appt_id INT NOT NULL,
+  diagnosis VARCHAR(255),
+  treatment VARCHAR(255),
+  notes VARCHAR(255)
+
+  FOREIGN KEY (pet_id) REFERENCES PETS(pet_id),
+  FOREIGN KEY (appt_id) REFERENCES APPOINTMENTS(appt_id)
+);
+-- One PETS to Many MEDICAL_RECORDS
+-- One APPOINTMENTS to One MEDICAL_RECORD
+
+CREATE TABLE BILLING (
+  payments_id INT PRIMARY KEY AUTO_INCREMENT,
+  appt_id INT NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  payment_date DATE,
+  payment_method VARCHAR(50),
+  status VARCHAR(50),
+
+  FOREIGN KEY (appt_id) REFERENCES APPOINTMENTS(appt_id)
+);
+--One APPOINTMENTS to Many BILLING
