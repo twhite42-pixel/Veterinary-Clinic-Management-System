@@ -1,0 +1,140 @@
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f5f3;
+      min-height: 100vh;
+      padding: 2rem;
+      background-image: url('dog-cat.jpg');
+      background-size: cover;       /* Covers the entire element */
+      background-position: center;  /* Centers the image */
+      background-repeat: no-repeat; /* Prevents tiling */
+      background-attachment: fixed; /* Parallax-like fixed effect */
+    }
+  
+    .page { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+  
+    .card {
+      background: #fff;
+      border: 1px solid #e4e4e0;
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+  
+    h2 { font-size: 18px; font-weight: 600; color: #111; margin-bottom: 4px; }
+    h3 { font-size: 16px; font-weight: 600; color: #111; margin-bottom: 4px; }
+    .subtitle { font-size: 13px; color: #888; margin-bottom: 1.5rem; }
+  
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+  
+    label { font-size: 13px; font-weight: 500; color: #555; }
+  
+    input {
+      height: 36px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0 12px;
+      font-size: 14px;
+      color: #111;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+  
+    input:focus { border-color: #1d9e75; box-shadow: 0 0 0 3px #e1f5ee; }
+    input::placeholder { color: #bbb; }
+  
+    .btn {
+      height: 38px;
+      padding: 0 20px;
+      margin-top: 0.25rem;
+      background: #0f6e56;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  
+    .btn:hover { background: #085041; }
+  
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead tr { border-bottom: 1px solid #eee; }
+    th {
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    td { padding: 12px; color: #111; border-bottom: 1px solid #f0f0ee; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #fafaf8; }
+  
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 500;
+      background: #e1f5ee;
+      color: #085041;
+    }
+  
+    .back { font-size: 13px; color: #888; text-decoration: none; }
+    .back:hover { color: #111; }
+  </style>
+  
+  <div class="page">
+    <div class="card">
+      <h2>Add medical record</h2>
+      <p class="subtitle">Log a new diagnosis and treatment for a patient.</p>
+      <form method="POST">
+        <div class="grid">
+          <div class="field">
+            <label for="pet">Pet name</label>
+            <input type="text" id="pet" name="pet" placeholder="e.g. Buddy" required>
+          </div>
+          <div class="field">
+            <label for="diagnosis">Diagnosis</label>
+            <input type="text" id="diagnosis" name="diagnosis" placeholder="e.g. Ear infection" required>
+          </div>
+          <div class="field full">
+            <label for="treatment">Treatment</label>
+            <input type="text" id="treatment" name="treatment" placeholder="e.g. Antibiotics 2x daily" required>
+          </div>
+        </div>
+        <button class="btn" type="submit">Add record</button>
+      </form>
+    </div>
+  
+    <div class="card">
+      <h3>Patient records</h3>
+      <p class="subtitle">All logged diagnoses and treatments.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Pet</th>
+            <th>Diagnosis</th>
+            <th>Treatment</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for record in records %}
+          <tr>
+            <td><span class="badge">{{ record['pet'] }}</span></td>
+            <td>{{ record['diagnosis'] }}</td>
+            <td>{{ record['treatment'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  
+    <a class="back" href="/">← Back to dashboard</a>
+  </div>

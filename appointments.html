@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Schedule Appointment</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f5f3;
+      min-height: 100vh;
+      padding: 2rem;
+      background-image: url('dog-cat.jpg');
+      background-size: cover;       /* Covers the entire element */
+      background-position: center;  /* Centers the image */
+      background-repeat: no-repeat; /* Prevents tiling */
+      background-attachment: fixed; /* Parallax-like fixed effect */
+    }
+
+    .page { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e4e4e0;
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+
+    h2 { font-size: 18px; font-weight: 600; color: #111; margin-bottom: 4px; }
+    h3 { font-size: 16px; font-weight: 600; color: #111; margin-bottom: 4px; }
+    .subtitle { font-size: 13px; color: #888; margin-bottom: 1.5rem; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    label { font-size: 13px; font-weight: 500; color: #555; }
+
+    input {
+      height: 36px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0 12px;
+      font-size: 14px;
+      color: #111;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input:focus { border-color: #378add; box-shadow: 0 0 0 3px #e6f1fb; }
+
+    .btn {
+      height: 38px;
+      padding: 0 20px;
+      margin-top: 0.75rem;
+      background: #185fa5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover { background: #0c447c; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead tr { border-bottom: 1px solid #eee; }
+    th {
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    td { padding: 12px; color: #111; border-bottom: 1px solid #f0f0ee; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #fafaf8; }
+
+    .pet-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 500;
+      background: #e6f1fb;
+      color: #0c447c;
+    }
+
+    .back { font-size: 13px; color: #888; text-decoration: none; }
+    .back:hover { color: #111; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <div class="card">
+    <h2>Schedule appointment</h2>
+    <p class="subtitle">Pick a pet and a date to book an appointment.</p>
+    <form method="POST">
+      <div class="grid">
+        <div class="field">
+          <label for="pet">Pet name</label>
+          <input type="text" id="pet" name="pet" placeholder="e.g. Buddy" required>
+        </div>
+        <div class="field">
+          <label for="date">Appointment date</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+      </div>
+      <button class="btn" type="submit">Schedule appointment</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>Upcoming appointments</h3>
+    <p class="subtitle">All scheduled visits.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Pet</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for appointment in appointments %}
+        <tr>
+          <td><span class="pet-badge">{{ appointment['pet'] }}</span></td>
+          <td>{{ appointment['date'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a class="back" href="/">← Back to dashboard</a>
+</div>
+
+</body>
+</html>
