@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VetCare Medical Record</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <h2>VetCare</h2>
+        <p>Management System</p>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="index.html#pet-registration">Patient Registration</a></li>
+          <li><a href="index.html#appointment">Appointment Scheduling</a></li>
+          <li><a href="index.html#billing">Billing</a></li>
+          <li><a href="records.html" class="active">Patient Records</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Medical Record</h1>
+          <p>View and update medical history and treatment information.</p>
+        </div>
+        <a class="top-link-btn" href="records.html">Back to Records</a>
+      </header>
+
+      <section class="section">
+        <h2>Patient Information</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Pet Name</h3>
+            <p id="medicalPetName">-</p>
+          </div>
+          <div class="card">
+            <h3>Owner</h3>
+            <p id="medicalOwnerName">-</p>
+          </div>
+          <div class="card">
+            <h3>Phone</h3>
+            <p id="medicalOwnerPhone">-</p>
+          </div>
+          <div class="card">
+            <h3>Breed / Age</h3>
+            <p id="medicalBreedAge">-</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section form-section">
+        <h2>Medical History and Treatment</h2>
+
+        <form id="medicalForm">
+          <div class="full-width">
+            <label for="medicalHistory">Medical History</label>
+            <textarea id="medicalHistory" rows="5" placeholder="Enter medical history"></textarea>
+          </div>
+
+          <div class="full-width">
+            <label for="diagnosis">Diagnosis</label>
+            <input type="text" id="diagnosis" placeholder="Enter diagnosis" />
+          </div>
+
+          <div class="full-width">
+            <label for="treatmentPlan">Treatment Plan</label>
+            <textarea id="treatmentPlan" rows="4" placeholder="Enter treatment plan"></textarea>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label for="medication">Medication</label>
+              <input type="text" id="medication" placeholder="Medication name" />
+            </div>
+
+            <div>
+              <label for="dosage">Dosage</label>
+              <input type="text" id="dosage" placeholder="Dosage instructions" />
+            </div>
+          </div>
+
+          <button type="submit" class="primary-btn">Save Medical Record</button>
+          <p id="medicalMessage" class="message"></p>
+        </form>
+      </section>
+
+      <section class="section">
+        <h2>Current Saved Summary</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Medical History</th>
+                <th>Diagnosis</th>
+                <th>Treatment Plan</th>
+                <th>Medication</th>
+                <th>Dosage</th>
+              </tr>
+            </thead>
+            <tbody id="medicalSummaryTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

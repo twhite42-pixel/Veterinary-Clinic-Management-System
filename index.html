@@ -1,67 +1,212 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Veterinary Clinic Management System</title>
-
-<style>
-
-body{
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f9;
-    text-align: center;
-    /* Basic background image */
-
-  background-image: url('dog-cat.jpg');
-  background-size: cover;       /* Covers the entire element */
-  background-position: center;  /* Centers the image */
-  background-repeat: no-repeat; /* Prevents tiling */
-  background-attachment: fixed; /* Parallax-like fixed effect */
-
-}
-
-h1 {
-    color: #222222;
-    text-shadow:
-      0 0 8px rgba(180, 180, 180, 0.9),
-      0 0 16px rgba(160, 160, 160, 0.7),
-      0 0 30px rgba(140, 140, 140, 0.5),
-      0 0 50px rgba(120, 120, 120, 0.3),
-      2px 2px 4px rgba(50, 50, 50, 0.6);
-  }
-
-ul{
-    list-style-type: none;
-    padding: 0;
-    margin-top: 40px;
-}
-
-li{
-    margin: 20px;
-}
-
-a{
-    text-decoration: none;
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-size: 18px;
-    display: inline-block;
-    width: 250px;
-}
-
-a:hover{
-    background-color: #45a049;
-}
-
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VetCare Management System</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <h2>VetCare</h2>
+        <p>Management System</p>
+      </div>
 
-<h1>Veterinary Clinic Management System</h1>
+      <nav>
+        <ul>
+          <li><a href="#dashboard" class="active">Dashboard</a></li>
+          <li><a href="#pet-registration">Patient Registration</a></li>
+          <li><a href="#appointment">Appointment Scheduling</a></li>
+          <li><a href="#billing">Billing</a></li>
+          <li><a href="records.html">Patient Records</a></li>
+        </ul>
+      </nav>
+    </aside>
 
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Veterinary Clinic Dashboard</h1>
+          <p>Manage patient registration, appointments, billing, and records in one place.</p>
+        </div>
+        <a class="top-link-btn" href="records.html">Open Records Page</a>
+      </header>
+
+      <section id="dashboard" class="section">
+        <h2>Dashboard Overview</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Total Patients</h3>
+            <p id="totalPatients">0</p>
+          </div>
+          <div class="card">
+            <h3>Total Appointments</h3>
+            <p id="totalAppointments">0</p>
+          </div>
+          <div class="card">
+            <h3>Completed Visits</h3>
+            <p id="completedCount">0</p>
+          </div>
+          <div class="card">
+            <h3>Unpaid Invoices</h3>
+            <p id="unpaidCount">0</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="pet-registration" class="section form-section">
+        <h2>Patient Registration</h2>
+
+        <form id="petForm">
+          <div class="form-grid">
+            <div>
+              <label for="petName">Pet Name</label>
+              <input type="text" id="petName" required />
+            </div>
+
+            <div>
+              <label for="petType">Pet Type</label>
+              <input type="text" id="petType" required />
+            </div>
+
+            <div>
+              <label for="breed">Breed</label>
+              <input type="text" id="breed" />
+            </div>
+
+            <div>
+              <label for="age">Age</label>
+              <input type="number" id="age" min="0" />
+            </div>
+
+            <div>
+              <label for="ownerName">Owner Name</label>
+              <input type="text" id="ownerName" required />
+            </div>
+
+            <div>
+              <label for="ownerPhone">Owner Phone</label>
+              <input type="tel" id="ownerPhone" required />
+            </div>
+          </div>
+
+          <button type="submit" class="primary-btn">Register Patient</button>
+          <p id="petMessage" class="message"></p>
+        </form>
+      </section>
+
+      <section id="appointment" class="section form-section">
+        <h2>Appointment Scheduling</h2>
+
+        <form id="appointmentForm">
+          <div class="form-grid">
+            <div>
+              <label for="apptPetSelect">Select Patient</label>
+              <select id="apptPetSelect" required>
+                <option value="">Choose a patient</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="apptOwnerPhone">Owner Phone</label>
+              <input type="text" id="apptOwnerPhone" readonly />
+            </div>
+
+            <div>
+              <label for="apptDate">Appointment Date</label>
+              <input type="date" id="apptDate" required />
+            </div>
+
+            <div>
+                <label for ="appTime">Appointment Time</label>
+                <input type="time" id="apptTime" min="06:00" max="19:00" step="1800" required />
+            </div>
+
+            <div>
+              <label for="doctor">Assigned Veterinarian</label>
+              <input type="text" id="doctor" />
+            </div>
+
+            <div>
+              <label for="apptStatus">Appointment Status</label>
+              <select id="apptStatus">
+                <option>Scheduled</option>
+                <option>Checked In</option>
+                <option>Cancelled</option>
+                <option>No Show</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="full-width">
+            <label for="reason">Reason for Visit</label>
+            <textarea id="reason" rows="4"></textarea>
+          </div>
+
+          <button type="submit" class="primary-btn">Schedule Appointment</button>
+          <p id="appointmentMessage" class="message"></p>
+        </form>
+      </section>
+
+    Replace your current billing fields with this:
+
+<section id="billing" class="section form-section">
+  <h2>Billing Information</h2>
+
+  <form id="billingForm">
+    <div class="form-grid">
+      <div>
+        <label for="billPetSelect">Select Patient</label>
+        <select id="billPetSelect" required>
+          <option value="">Choose a patient</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="billOwnerPhone">Owner Phone</label>
+        <input type="text" id="billOwnerPhone" readonly />
+      </div>
+
+      <div>
+        <label for="serviceType">Service Type</label>
+        <input type="text" id="serviceType" required />
+      </div>
+
+            <div>
+              <label for="amount">Amount</label>
+              <input type="number" id="amount" step="0.01" required />
+            </div>
+
+            <div>
+              <label for="paymentMethod">Payment Method</label>
+              <select id="paymentMethod">
+                <option>Cash</option>
+                <option>Card</option>
+                <option>Insurance</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="invoiceStatus">Invoice Status</label>
+              <select id="invoiceStatus">
+                <option>Unpaid</option>
+                <option>Paid</option>
+                <option>Partially Paid</option>
+                <option>Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="primary-btn">Save Billing</button>
+          <p id="billingMessage" class="message"></p>
+        </form>
+      </section>
+    </main>
+  </div>
 <ul>
 <li><a href="register_pet">Register Pet</a></li>
 <li><a href="appointments">Schedule Appointment</a></li>
@@ -69,5 +214,6 @@ a:hover{
 <li><a href="billing">Billing</a></li>
 </ul>
 
+  <script src="script.js"></script>
 </body>
 </html>

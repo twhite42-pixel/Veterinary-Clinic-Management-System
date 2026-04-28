@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VetCare Records</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <h2>VetCare</h2>
+        <p>Management System</p>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="index.html#pet-registration">Patient Registration</a></li>
+          <li><a href="index.html#appointment">Appointment Scheduling</a></li>
+          <li><a href="index.html#billing">Billing</a></li>
+          <li><a href="records.html" class="active">Patient Records</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Patient Records</h1>
+          <p>Search, update statuses, and open the medical record page.</p>
+        </div>
+        <a class="top-link-btn" href="index.html">Back to Dashboard</a>
+      </header>
+
+      <section class="section">
+        <div class="records-header">
+          <h2>Patient Records</h2>
+          <div class="search-box">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search by pet name or owner phone number..."
+            />
+            <button type="button" onclick="searchRecords()">Search</button>
+            <button type="button" onclick="showAllRecords()">Show All</button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Pet</th>
+                <th>Type</th>
+                <th>Owner</th>
+                <th>Phone</th>
+                <th>Appointment</th>
+                <th>Appointment Status</th>
+                <th>Invoice</th>
+                <th>Invoice Status</th>
+                <th>Medical Record</th>
+              </tr>
+            </thead>
+            <tbody id="recordsTable"></tbody>
+          </table>
+        </div>
+
+        <p id="recordMessage" class="message"></p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
