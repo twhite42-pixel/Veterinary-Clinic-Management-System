@@ -31,7 +31,7 @@
           <h1>Patient Records</h1>
           <p>Search, update statuses, and open the medical record page.</p>
         </div>
-        <a class="top-link-btn" href="index.html">Back to Dashboard</a>
+        <a class="top-link-btn" href="/index.html">Back to Dashboard</a>
       </header>
 
       <section class="section">
@@ -62,8 +62,20 @@
                 <th>Invoice Status</th>
                 <th>Medical Record</th>
               </tr>
-            </thead>
-            <tbody id="recordsTable"></tbody>
+           <tbody>
+              {% for row in records %}
+              <tr>
+                <td>{{ row.pet_name }}</td>
+                <td>{{ row.species }}</td>
+                <td>{{ row.owner_name }}</td>
+                <td>{{ row.phone }}</td>
+                <td>{{ row.appt_date }}</td>
+                <td>{{ row.appt_status }}</td>
+                <td>{{ row.amount }}</td>
+                <td>{{ row.billing_status }}</td>
+                <td>View</td>
+              </tr>
+               {% endfor %}
           </table>
         </div>
 
