@@ -62,20 +62,7 @@
                 <th>Invoice Status</th>
                 <th>Medical Record</th>
               </tr>
-           <tbody>
-              {% for row in records %}
-              <tr>
-                <td>{{ row.pet_name }}</td>
-                <td>{{ row.species }}</td>
-                <td>{{ row.owner_name }}</td>
-                <td>{{ row.phone }}</td>
-                <td>{{ row.appt_date }}</td>
-                <td>{{ row.appt_status }}</td>
-                <td>{{ row.amount }}</td>
-                <td>{{ row.billing_status }}</td>
-                <td>View</td>
-              </tr>
-               {% endfor %}
+              <tbody id ="recordsTable"></tbody>
           </table>
         </div>
 
