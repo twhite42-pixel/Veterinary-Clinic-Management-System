@@ -20,14 +20,23 @@ def home():
 @app.route('/register_pet', methods=['GET', 'POST'])
 def register_pet():
     if request.method == 'POST':
-        name = request.form['name']
+        owner_name = request.form['name']
+        pet_name = request.form['owner']
         species = request.form['species']
-        owner = request.form['owner']
+
+        first, last = owner_name.split(" ", 1)
+
+        conn.execute(
+            "INSERT INTO OWNERS (first_name, last_name) VALUES (?, ?)",
+            (first, last)
+        )
+
+        owner_id = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
 
         conn = get_db_connection()
         conn.execute(
             "INSERT INTO pets (name, species, owner) VALUES (?, ?, ?)",
-            (name, species, owner)
+            (owner_name, pet_name, species)
         )
         conn.commit()
         conn.close()
@@ -43,19 +52,22 @@ def appointments():
     conn = get_db_connection()
 
     if request.method == 'POST':
-        pet = request.form['pet']
-        date = request.form['date']
+        pet_id = request.form['pet_id']
+        appt_date = request.form['date']
+        status = reuest.form['statuus']
 
         conn.execute(
-            "INSERT INTO appointments (pet, date) VALUES (?, ?)",
-            (pet, date)
+            "INSERT INTO appointments (pet_id, staff_id, appt_date, status) VALUES (?, ?, ?, ?)",
+            (pet_id, 1, appt_date, status)
         )
         conn.commit()
+
+    pets = conn.execute("SELECT pet_id, anem FROM PETS").fetchall()
 
     appointments = conn.execute("SELECT * FROM appointments").fetchall()
     conn.close()
 
-    return render_template('appointments.html', appointments=appointments)
+    return render_template('appointments.html', pets=pets, appointments=appointments)
 
 
 # Medical Records
@@ -63,18 +75,23 @@ def appointments():
 def records():
     conn = get_db_connection()
 
-    if request.method == 'POST':
-        pet = request.form['pet']
-        diagnosis = request.form['diagnosis']
-        treatment = request.form['treatment']
+    data = conn.execute("""
+        SELECT 
+            p.pet_id,
+            p.name AS pet_name,
+            p.species,
+            o.first_name || ' ' || o.last_name AS owner_name,
+            o.phone,
+            a.appt_date,
+            a.status AS appt_status,
+            b.amount,
+            b.status AS billing_status
+        FROM PETS p
+        LEFT JOIN OWNERS o ON p.owner_id = o.owner_id
+        LEFT JOIN APPOINTMENTS a ON p.pet_id = a.pet_id
+        LEFT JOIN BILLING b ON a.appt_id = b.appt_id
+        """).fetchall()
 
-        conn.execute(
-            "INSERT INTO medical_records (pet, diagnosis, treatment) VALUES (?, ?, ?)",
-            (pet, diagnosis, treatment)
-        )
-        conn.commit()
-
-    records = conn.execute("SELECT * FROM medical_records").fetchall()
     conn.close()
 
     return render_template('records.html', records=records)
@@ -86,13 +103,13 @@ def billing():
     conn = get_db_connection()
 
     if request.method == 'POST':
-        pet = request.form['pet']
+        pet_id = request.form['pet_id']
         amount = request.form['amount']
         status = request.form['status']
 
         conn.execute(
-            "INSERT INTO billing (pet, amount, status) VALUES (?, ?, ?)",
-            (pet, amount, status)
+            "INSERT INTO billing (pet_id, amount, status) VALUES (?, ?, ?)",
+            (pet_id, amount, status)
         )
         conn.commit()
 
