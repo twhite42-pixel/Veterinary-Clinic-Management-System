@@ -104,7 +104,7 @@ def records():
 
     conn.close()
 
-    return render_template('records.html', records=records)
+    return render_template('records.html', records=data)
 
 
 # Billing
