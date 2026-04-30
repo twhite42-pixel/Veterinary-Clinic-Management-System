@@ -20,24 +20,34 @@ def home():
 @app.route('/register_pet', methods=['GET', 'POST'])
 def register_pet():
     if request.method == 'POST':
-        owner_name = request.form['name']
-        pet_name = request.form['owner']
+        conn = get_db_connection()
+
+        # get form data
+        pet_name = request.form['name']
         species = request.form['species']
+        owner_name = request.form['owner']
+        phone = request.form['phone']
 
-        first, last = owner_name.split(" ", 1)
+        # split owner name safely
+        parts = owner_name.split(" ", 1)
+        first = parts[0]
+        last = parts[1] if len(parts) > 1 else ""
 
+        # insert owner
         conn.execute(
-            "INSERT INTO OWNERS (first_name, last_name) VALUES (?, ?)",
-            (first, last)
+            "INSERT INTO OWNERS (first_name, last_name, phone) VALUES (?, ?, ?)",
+            (first, last, phone)
         )
 
+        # get owner_id
         owner_id = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
 
-        conn = get_db_connection()
+        # insert pet
         conn.execute(
-            "INSERT INTO pets (name, species, owner) VALUES (?, ?, ?)",
-            (owner_name, pet_name, species)
+            "INSERT INTO PETS (owner_id, name, species) VALUES (?, ?, ?)",
+            (owner_id, pet_name, species)
         )
+
         conn.commit()
         conn.close()
 
