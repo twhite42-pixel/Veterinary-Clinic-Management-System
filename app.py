@@ -64,7 +64,7 @@ def appointments():
     if request.method == 'POST':
         pet_id = request.form['pet_id']
         appt_date = request.form['date']
-        status = reuest.form['statuus']
+        status = reuest.form['status']
 
         conn.execute(
             "INSERT INTO appointments (pet_id, staff_id, appt_date, status) VALUES (?, ?, ?, ?)",
@@ -72,7 +72,7 @@ def appointments():
         )
         conn.commit()
 
-    pets = conn.execute("SELECT pet_id, anem FROM PETS").fetchall()
+    pets = conn.execute("SELECT pet_id, name FROM PETS").fetchall()
 
     appointments = conn.execute("SELECT * FROM appointments").fetchall()
     conn.close()
