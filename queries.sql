@@ -24,7 +24,7 @@ FROM APPOINTMENTS
 WHERE appt_date >= CURRENT_DATE;
 
 -- Add a new owner
-INSERT INTO OWNERS (first_name, last_name, pphone, email, address)
+INSERT INTO OWNERS (first_name, last_name, phone, email, address)
 VALUES ('John', 'Smith', '1234567890', 'john@email.com', '123 ABC St.');
 
 --Mark bill as paid
