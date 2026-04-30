@@ -59,13 +59,10 @@ CREATE TABLE MEDICAL_RECORDS (
 -- One APPOINTMENTS to One MEDICAL_RECORD
 
 CREATE TABLE BILLING (
-  payment_id INT PRIMARY KEY AUTO_INCREMENT,
-  appt_id INT NOT NULL,
-  amount DECIMAL(10,2) NOT NULL,
-  payment_date DATE,
-  payment_method VARCHAR(50),
-  status VARCHAR(50),
-
-  FOREIGN KEY (appt_id) REFERENCES APPOINTMENTS(appt_id)
+    bill_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    appt_id INTEGER,
+    amount REAL,
+    status TEXT,
+    FOREIGN KEY (appt_id) REFERENCES APPOINTMENTS(appt_id)
 );
 --One APPOINTMENTS to Many BILLING
