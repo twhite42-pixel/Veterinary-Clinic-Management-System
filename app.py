@@ -53,7 +53,7 @@ def register_pet():
 
         return redirect('/')
 
-    return render_template('register_pet.html')
+    return render_template('index.html')
 
 
 # Appointment Scheduling
