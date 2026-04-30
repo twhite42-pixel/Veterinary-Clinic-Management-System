@@ -340,18 +340,29 @@ function setupBillingAutoCalc() {
   const remainingBalanceInput = document.getElementById("remainingBalance");
   const invoiceStatusSelect = document.getElementById("invoiceStatus");
 
-  if (!amountInput || !amountPaidInput || !remainingBalanceInput || !invoiceStatusSelect) return;
+  if (!amountInput) return;
 
   function updateBalanceFields() {
-    const totalAmount = amountInput.value;
-    const amountPaid = amountPaidInput.value;
+    const totalAmount = amountInput.value || 0;
+    const amountPaid = amountPaidInput ? amountPaidInput.value : 0;
 
-    remainingBalanceInput.value = calculateRemainingBalance(totalAmount, amountPaid);
-    invoiceStatusSelect.value = determineInvoiceStatus(totalAmount, amountPaid);
+    const remaining = calculateRemainingBalance(totalAmount, amountPaid);
+    const status = determineInvoiceStatus(totalAmount, amountPaid);
+
+    if (remainingBalanceInput) {
+      remainingBalanceInput.value = remaining;
+    }
+
+    if (invoiceStatusSelect) {
+      invoiceStatusSelect.value = status;
+    }
   }
 
   amountInput.addEventListener("input", updateBalanceFields);
-  amountPaidInput.addEventListener("input", updateBalanceFields);
+
+  if (amountPaidInput) {
+    amountPaidInput.addEventListener("input", updateBalanceFields);
+  }
 }
 
 function setupIndexPage() {
