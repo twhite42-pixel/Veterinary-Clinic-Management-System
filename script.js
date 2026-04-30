@@ -364,6 +364,7 @@ function setupIndexPage() {
   if (petForm) {
     petForm.addEventListener("submit", function (event) {
       event.preventDefault();
+      console.log("SUBMIT WORKED");
 
       const patients = getPatients();
       const patient = {
