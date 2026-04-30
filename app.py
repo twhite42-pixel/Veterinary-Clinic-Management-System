@@ -64,7 +64,7 @@ def appointments():
     if request.method == 'POST':
         pet_id = request.form['pet_id']
         appt_date = request.form['date']
-        status = reuest.form['status']
+        status = request.form['status']
 
         conn.execute(
             "INSERT INTO appointments (pet_id, staff_id, appt_date, status) VALUES (?, ?, ?, ?)",
