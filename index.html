@@ -20,7 +20,7 @@
           <li><a href="#pet-registration">Patient Registration</a></li>
           <li><a href="#appointment">Appointment Scheduling</a></li>
           <li><a href="#billing">Billing</a></li>
-          <li><a href="records.html">Patient Records</a></li>
+          <li><a href="/records.html">Patient Records</a></li>
         </ul>
       </nav>
     </aside>
@@ -31,7 +31,7 @@
           <h1>Veterinary Clinic Dashboard</h1>
           <p>Manage patient registration, appointments, billing, and records in one place.</p>
         </div>
-        <a class="top-link-btn" href="records.html">Open Records Page</a>
+        <a class="top-link-btn" href="/records.html">Open Records Page</a>
       </header>
 
       <section id="dashboard" class="section">
@@ -39,19 +39,19 @@
         <div class="cards">
           <div class="card">
             <h3>Total Patients</h3>
-            <p id="totalPatients">{{ total_patients }}</p>
+            <p id="totalPatients">0</p>
           </div>
           <div class="card">
             <h3>Total Appointments</h3>
-            <p id="totalAppointments">{{ total_appointments }}</p>
+            <p id="totalAppointments">0</p>
           </div>
           <div class="card">
             <h3>Completed Visits</h3>
-            <p id="completedCount">{{ completed_visits }}</p>
+            <p id="completedCount">0</p>
           </div>
           <div class="card">
             <h3>Unpaid Invoices</h3>
-            <p id="unpaidCount">{{ unpaid_invoices }}</p>
+            <p id="unpaidCount"></p>
           </div>
         </div>
       </section>
@@ -63,12 +63,12 @@
           <div class="form-grid">
             <div>
               <label for="petName">Pet Name</label>
-              <input type="text" id="petName" required />
+              <input type="text" id="petName" name="name" required />
             </div>
 
             <div>
               <label for="petType">Pet Type</label>
-              <input type="text" id="petType" required />
+              <input type="text" id="petType" name="species" required />
             </div>
 
             <div>
@@ -83,12 +83,12 @@
 
             <div>
               <label for="ownerName">Owner Name</label>
-              <input type="text" id="ownerName" required />
+              <input type="text" id="ownerName" name="owner" required />
             </div>
 
             <div>
               <label for="ownerPhone">Owner Phone</label>
-              <input type="tel" id="ownerPhone" required />
+              <input type="tel" id="ownerPhone" name="phone" required />
             </div>
           </div>
 
@@ -100,7 +100,7 @@
       <section id="appointment" class="section form-section">
         <h2>Appointment Scheduling</h2>
 
-        <form method="POST" action="/appointments">
+        <form>
           <div class="form-grid">
             <div>
               <label for="apptPetSelect">Select Patient</label>
@@ -152,12 +152,11 @@
         </form>
       </section>
 
-    Replace your current billing fields with this:
 
 <section id="billing" class="section form-section">
   <h2>Billing Information</h2>
 
-  <form method="POST" action="/billing">
+  <form>
     <div class="form-grid">
       <div>
         <label for="billPetSelect">Select Patient</label>
