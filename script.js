@@ -361,6 +361,8 @@ function setupIndexPage() {
   const apptPetSelect = document.getElementById("apptPetSelect");
   const billPetSelect = document.getElementById("billPetSelect");
 
+  console.log("FOUND FORM:", petForm);
+  
   if (petForm) {
     petForm.addEventListener("submit", function (event) {
       event.preventDefault();
