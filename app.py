@@ -113,13 +113,13 @@ def billing():
     conn = get_db_connection()
 
     if request.method == 'POST':
-        pet_id = request.form['pet_id']
+        appt_id = request.form['appt_id']
         amount = request.form['amount']
         status = request.form['status']
 
         conn.execute(
-            "INSERT INTO billing (pet_id, amount, status) VALUES (?, ?, ?)",
-            (pet_id, amount, status)
+            "INSERT INTO billing (appt_id, amount, status) VALUES (?, ?, ?)",
+            (appt_id, amount, status)
         )
         conn.commit()
 
